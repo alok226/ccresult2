@@ -214,31 +214,81 @@
             .c-seal { margin: 20px 0; }
         }
 
-        /* === PRINT LOGIC === */
-        @media print {
-            body { background: white !important; -webkit-print-color-adjust: exact; padding: 0; margin: 0; }
-            .no-print, .bg-shape { display: none !important; }
-            .main-wrapper { max-width: 100%; box-shadow: none; margin: 0; padding: 0; }
-            
-            /* Hide both initially in print */
-            .result-wrapper, .certificate-wrapper { display: none; }
+        /* === ROBUST PRINT LOGIC (A4 SEPARATION) === */
+        
+        /* Set automatic page orientations for modern browsers */
+        @page marksheet-page { size: A4 portrait; margin: 10mm; }
+        @page cert-page { size: A4 landscape; margin: 10mm; }
 
-            /* Marksheet Print Mode */
-            body.print-mode-marksheet .result-wrapper { 
-                display: block !important; margin: 0; border: none; box-shadow: none; width: 100%; padding: 20px; 
+        @media print {
+            body { 
+                background: white !important; 
+                -webkit-print-color-adjust: exact; 
+                print-color-adjust: exact; 
+                padding: 0; 
+                margin: 0; 
             }
-            body.print-mode-marksheet .total-score-box { background: #eef2ff !important; border: 2px solid #818cf8; }
-            
-            /* Certificate Print Mode */
-            body.print-mode-certificate .certificate-wrapper { 
-                display: block !important; margin: 0; border: none; box-shadow: none; width: 100%; padding: 0;
+            .no-print, .bg-shape { display: none !important; }
+            .main-wrapper { 
+                max-width: 100% !important; 
+                width: 100% !important; 
+                box-shadow: none !important; 
+                margin: 0 !important; 
+                padding: 0 !important; 
             }
-            body.print-mode-certificate .cert-border-outer { border-width: 0px; height: 98vh; padding: 5px; border-radius: 0; background: var(--primary);}
-            body.print-mode-certificate .cert-border-inner { border-radius: 0; }
-            /* Reset flex for print signatures so they sit side by side */
-            body.print-mode-certificate .c-signatures { flex-direction: row; }
-            body.print-mode-certificate .cert-watermark { opacity: 0.05 !important; }
             
+            /* -- Base Rules to force proper A4 separation -- */
+            .result-wrapper { 
+                display: block !important; 
+                page: marksheet-page; /* Bind to Portrait */
+                page-break-after: always;
+                break-after: page;
+                margin: 0 !important; 
+                border: none !important; 
+                box-shadow: none !important; 
+                width: 100% !important; 
+                padding: 10px 20px !important; 
+            }
+            
+            .certificate-wrapper { 
+                display: block !important; 
+                page: cert-page; /* Bind to Landscape */
+                page-break-after: always;
+                break-after: page;
+                margin: 0 !important; 
+                border: none !important; 
+                box-shadow: none !important; 
+                width: 100% !important; 
+                padding: 0 !important;
+            }
+
+            .total-score-box { background: #eef2ff !important; border: 2px solid #818cf8 !important; }
+            
+            /* -- Fix Certificate Scaling and Paper Bounds -- */
+            .cert-border-outer { 
+                border-width: 0px !important; 
+                height: auto !important; 
+                min-height: 180mm !important; /* Forces it to fill A4 landscape safely */
+                padding: 8px !important; 
+                border-radius: 0 !important; 
+                background: var(--primary) !important;
+            }
+            .cert-border-inner { 
+                border-radius: 0 !important; 
+                height: auto !important; 
+                min-height: 175mm !important;
+                padding: 40px !important;
+            }
+
+            /* Ensure signatures stay in a row on print */
+            .c-signatures { flex-direction: row !important; align-items: flex-end !important; justify-content: space-around !important; }
+            .cert-watermark { opacity: 0.05 !important; }
+            
+            /* -- Isolation Logic: Hides the unwanted document based on print button clicked -- */
+            body.print-mode-marksheet .certificate-wrapper { display: none !important; }
+            body.print-mode-certificate .result-wrapper { display: none !important; }
+            
+            /* Fallback @page for older browsers */
             @page { size: auto; margin: 10mm; }
         }
     </style>
@@ -434,7 +484,7 @@
                     <i class="fas fa-award"></i> Print Certificate
                 </button>
             </div>
-            <p style="font-size: 12px; color: #64748b; margin-top: 15px;">* For best certificate results, set print layout to <strong>Landscape</strong>.</p>
+            <p style="font-size: 12px; color: #64748b; margin-top: 15px;">* Documents will automatically switch to the correct orientation (Portrait/Landscape) during print.</p>
         </div>
 
         <footer class="main-footer no-print">
