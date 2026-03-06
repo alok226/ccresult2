@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Contest Result | Sri Balbhadralal Arun Kumar</title>
+    
+    <!-- Google Fonts for Premium Look -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Great+Vibes&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Confetti Library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        /* === VARIABLES & BASE STYLES === */
+        :root {
+            --primary: #4338ca; /* Deep Indigo */
+            --accent: #ec4899;  /* Pink */
+            --gold: #f59e0b;    /* Premium Gold */
+            --dark: #0f172a;    /* Slate 900 */
+            --bg-grad: linear-gradient(135deg, #eef2ff 0%, #fae8ff 100%);
+        }
+
+        body { 
+            font-family: 'Outfit', sans-serif; 
+            background: var(--bg-grad); 
+            margin: 0; 
+            padding: 20px; 
+            color: var(--dark); 
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* --- ANIMATED BACKGROUND BLOBS --- */
+        .bg-shape { position: absolute; filter: blur(60px); z-index: -1; opacity: 0.5; animation: move 12s infinite alternate ease-in-out; }
+        .shape-1 { top: -5%; left: -10%; width: 400px; height: 400px; background: #c7d2fe; border-radius: 50%; }
+        .shape-2 { top: 30%; right: -10%; width: 350px; height: 350px; background: #fbcfe8; border-radius: 50%; animation-duration: 18s; animation-direction: alternate-reverse; }
+        .shape-3 { bottom: -10%; left: 15%; width: 500px; height: 500px; background: #fde68a; border-radius: 50%; animation-duration: 15s; }
+        @keyframes move { from { transform: translate(0, 0) scale(1); } to { transform: translate(40px, 60px) scale(1.1); } }
+
+        .main-wrapper { max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+
+        /* === HEADER === */
+        .header { 
+            background: rgba(255,255,255,0.85); 
+            backdrop-filter: blur(12px); 
+            padding: 20px; 
+            border-radius: 20px; 
+            margin-bottom: 30px; 
+            border: 1px solid rgba(255,255,255,0.6); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .brand-row { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 15px;}
+        .logo-box { width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;}
+        .logo { max-height: 70px; max-width: 100%; object-fit: contain; }
+        .header-text { text-align: center; flex: 1; }
+        .header-text h1 { font-size: 24px; margin: 5px 0; background: -webkit-linear-gradient(45deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;}
+        .small-tag { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 2px; margin: 0;}
+        .sub-text { font-size: 12px; color: #64748b; margin: 0;}
+
+        /* === SEARCH SECTION === */
+        .search-container { text-align: center; margin-bottom: 40px; }
+        .badge-wrapper { margin-bottom: -40px; position: relative; z-index: 2;}
+        .contest-badge { height: 110px; filter: drop-shadow(0 8px 15px rgba(0,0,0,0.15)); }
+        
+        .search-card { 
+            background: rgba(255,255,255,0.95); 
+            backdrop-filter: blur(20px);
+            padding: 60px 30px 35px 30px; 
+            border-radius: 24px; 
+            box-shadow: 0 15px 50px rgba(67,56,202,0.1); 
+            border: 1px solid rgba(255,255,255,0.8);
+        }
+        .search-card h3 { margin: 0 0 5px 0; font-size: 22px; color: var(--dark); }
+        .search-card p { margin: 0 0 25px 0; font-size: 14px; color: #64748b; }
+        
+        .instruction-box { background: #e0f2fe; border: 1px solid #bae6fd; color: #0369a1; padding: 12px; border-radius: 12px; font-size: 13px; margin: 0 auto 25px auto; max-width: 90%; line-height: 1.5; text-align: left;}
+        
+        .input-group { position: relative; max-width: 350px; margin: 0 auto 20px auto; }
+        .input-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-weight: bold; font-size: 18px;}
+        input { width: 100%; padding: 18px 18px 18px 45px; border: 2px solid #e2e8f0; border-radius: 16px; font-size: 16px; font-family: 'Outfit', sans-serif; font-weight: 600; box-sizing: border-box; background: #f8fafc; transition: 0.3s;}
+        input:focus { border-color: var(--primary); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(67, 56, 202, 0.1);}
+        
+        .btn-search { background: linear-gradient(135deg, var(--primary), var(--accent)); color: white; border: none; padding: 18px 50px; border-radius: 16px; font-weight: 700; cursor: pointer; width: 100%; max-width: 350px; font-size: 16px; transition: 0.3s; box-shadow: 0 10px 20px rgba(67, 56, 202, 0.2);}
+        .btn-search:hover { transform: translateY(-3px); box-shadow: 0 15px 25px rgba(67, 56, 202, 0.3); }
+        
+        .error-msg { margin-top: 20px; background: #fee2e2; color: #ef4444; padding: 15px; border-radius: 12px; font-weight: 600; }
+
+        /* === MARKSHEET (REPORT CARD) === */
+        .result-wrapper { background: white; padding: 45px 35px; border-radius: 16px; box-shadow: 0 25px 60px rgba(0,0,0,0.1); margin-bottom: 40px; position: relative; border: 1px solid #f1f5f9; }
+        .border-decor { position: absolute; width: 50px; height: 50px; border: 4px solid var(--gold); pointer-events: none; border-radius: 4px;}
+        .top-left { top: 15px; left: 15px; border-right: 0; border-bottom: 0; }
+        .top-right { top: 15px; right: 15px; border-left: 0; border-bottom: 0; }
+        .bottom-left { bottom: 15px; left: 15px; border-top: 0; border-right: 0; }
+        .bottom-right { bottom: 15px; right: 15px; border-top: 0; border-left: 0; }
+        
+        .cert-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #f1f5f9; padding-bottom: 25px; margin-bottom: 30px; }
+        .sheet-logo { height: 65px; object-fit: contain;}
+        .ch-center { text-align: center; } 
+        .ch-center h2 { margin: 0; font-size: 20px; letter-spacing: 1px; color: var(--dark);}
+        .ch-center p { margin: 5px 0 0; font-size: 11px; color: var(--gold); font-weight: 700; letter-spacing: 2px; }
+        
+        .profile-section { display: flex; justify-content: space-between; align-items: center; background: #f8fafc; padding: 25px; border-radius: 16px; margin-bottom: 30px; border: 1px solid #e2e8f0;}
+        .ps-info h3 { margin: 0; font-size: 26px; color: var(--primary); }
+        .handle { margin: 4px 0 10px 0; color: #64748b; font-weight: 600; font-size: 16px;}
+        .batch-tag { background: #e0e7ff; color: var(--primary); padding: 5px 15px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        
+        .rank-badge { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; width: 90px; height: 90px; border-radius: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 8px 20px rgba(245, 158, 11, 0.4); border: 3px solid #fef3c7;}
+        .rank-badge span { font-size: 8px; font-weight: 700; margin-bottom: 2px; letter-spacing: 1px;}
+        .rank-badge strong { font-size: 32px; line-height: 1; }
+        
+        .scores-list { margin-bottom: 30px; }
+        .score-row { margin-bottom: 18px; }
+        .sl-labels { display: flex; justify-content: space-between; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: #334155;}
+        .progress-track { height: 14px; background: #f1f5f9; border-radius: 8px; overflow: hidden; }
+        .progress-bar { height: 100%; width: 0%; transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); border-radius: 8px; }
+        .p-blue { background: linear-gradient(90deg, #6366f1, #4f46e5); } 
+        .p-pink { background: linear-gradient(90deg, #f472b6, #ec4899); } 
+        .p-green { background: linear-gradient(90deg, #34d399, #10b981); } 
+        .p-gold { background: linear-gradient(90deg, #fbbf24, #f59e0b); }
+        
+        .total-score-box { text-align: center; border: 2px dashed #818cf8; padding: 25px; border-radius: 16px; background: #eef2ff; color: var(--primary); margin-bottom: 30px;}
+        .total-score-box span { font-size: 12px; font-weight: 700; letter-spacing: 2px; color: #4f46e5;}
+        .total-score-box h1 { margin: 8px 0 0; font-size: 42px; font-weight: 900;}
+
+        /* SEALS & SIGNATURES */
+        .marksheet-signatures { display: flex; justify-content: space-between; align-items: flex-end; padding: 0 10px; }
+        .seal-box { text-align: center; width: 150px; }
+        .official-stamp { height: 80px; max-width: 140px; object-fit: contain; margin-bottom: -15px; opacity: 0.9; mix-blend-mode: multiply; filter: contrast(1.2); }
+        .seal-divider { height: 2px; background: #cbd5e1; width: 100%; margin-bottom: 5px; border-radius: 2px;}
+        .seal-box p { margin: 0; font-size: 13px; font-weight: 700; color: var(--dark); }
+        .seal-box span { font-size: 9px; color: #64748b; text-transform: uppercase; letter-spacing: 1px; }
+
+        .cert-footer { display: flex; justify-content: center; gap: 25px; margin-top: 35px; font-size: 14px; color: #475569; font-weight: 600; background: #f8fafc; padding: 15px; border-radius: 12px;}
+        .stat-box i { color: var(--primary); margin-right: 5px; }
+        .watermark-footer { text-align: center; margin-top: 25px; font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px;}
+
+        /* === NEW CERTIFICATE STYLES (CREATIVE THEME) === */
+        .certificate-wrapper { 
+            background: #fff; padding: 20px; margin-bottom: 40px; 
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15); border-radius: 20px; 
+            position: relative; overflow: hidden; 
+        }
+        .cert-border-outer { 
+            background: linear-gradient(135deg, var(--primary), var(--accent), var(--gold)); 
+            padding: 6px; height: 100%; box-sizing: border-box; border-radius: 16px; position: relative;
+        }
+        .cert-border-inner { 
+            background: #ffffff; padding: 50px 40px; text-align: center; 
+            height: 100%; box-sizing: border-box; position: relative; 
+            z-index: 1; overflow: hidden; border-radius: 10px;
+        }
+        
+        /* Creative Background Elements inside Certificate */
+        .cert-watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.04; width: 70%; z-index: -1; pointer-events: none; filter: grayscale(100%);}
+        .cert-bg-blob1 { position: absolute; top: -100px; right: -100px; width: 300px; height: 300px; background: linear-gradient(135deg, #fde68a, #f59e0b); border-radius: 50%; opacity: 0.15; z-index: -1; }
+        .cert-bg-blob2 { position: absolute; bottom: -100px; left: -100px; width: 350px; height: 350px; background: linear-gradient(135deg, #c7d2fe, #4f46e5); border-radius: 50%; opacity: 0.1; z-index: -1; }
+
+        .c-top-logos { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; }
+        .c-logo { height: 75px; object-fit: contain; position: relative; z-index: 2;}
+        .cert-award-icon { color: var(--gold); font-size: 50px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1)); position: relative; z-index: 2; }
+
+        .c-title-area h2 { 
+            font-family: 'Outfit', sans-serif; font-size: 46px; 
+            background: linear-gradient(45deg, var(--primary), var(--dark));
+            -webkit-background-clip: text; color: transparent;
+            text-transform: uppercase; letter-spacing: 2px; margin: 10px 0; font-weight: 900;
+        }
+        .c-subtitle { font-size: 13px; letter-spacing: 6px; color: var(--gold); font-weight: 700; text-transform: uppercase; margin-bottom: 35px;}
+
+        .c-name-area { margin: 40px 0; position: relative;}
+        .c-name-area h1 { font-family: 'Great Vibes', cursive; font-size: 75px; color: var(--accent); margin: 0; line-height: 1; font-weight: 400; text-shadow: 2px 2px 4px rgba(236, 72, 153, 0.1);}
+        .c-line { width: 60%; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); margin: 20px auto; border-radius: 50%;}
+
+        .c-body-text { font-size: 18px; color: #475569; line-height: 1.8; max-width: 85%; margin: 0 auto 40px auto; font-family: 'Outfit', sans-serif;}
+        .c-body-text strong { color: var(--primary); font-weight: 700;}
+
+        .c-signatures { display: flex; justify-content: space-around; align-items: flex-end; margin-top: 50px; }
+        .sig-block { text-align: center; width: 180px; position: relative;}
+        .cert-stamp { height: 80px; opacity: 0.9; mix-blend-mode: multiply; margin-bottom: -15px; filter: contrast(1.1);}
+        .sig-line { width: 100%; height: 2px; background: #cbd5e1; margin-bottom: 8px; }
+        .sig-block span { font-family: 'Outfit', sans-serif; font-weight: 700; display: block; font-size: 16px; color: var(--dark);}
+        .sig-block small { color: #64748b; font-size: 12px; font-family: 'Outfit', sans-serif; text-transform: uppercase; letter-spacing: 1px;}
+        .c-seal { height: 130px; opacity: 1; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.15));}
+
+        /* === ACTION BUTTONS === */
+        .action-zone { text-align: center; margin-top: 10px; background: rgba(255,255,255,0.9); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(255,255,255,0.6);}
+        .action-zone h3 { margin: 0 0 20px 0; font-size: 18px; color: var(--dark); }
+        .btn-row { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .btn-download { border: none; padding: 16px 30px; border-radius: 14px; cursor: pointer; font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 10px; transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.1);}
+        .btn-blue { background: var(--dark); color: white; }
+        .btn-gold { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+
+        .main-footer { text-align: center; font-size: 13px; color: #64748b; margin-top: 50px; padding-bottom: 30px; }
+
+        /* === MOBILE RESPONSIVE === */
+        @media (max-width: 650px) {
+            .brand-row { flex-direction: column; gap: 15px; }
+            .header-text h1 { font-size: 20px; }
+            .logo-box { width: 60px; height: 60px; }
+            .search-card { padding: 50px 20px 30px 20px; }
+            .profile-section { flex-direction: column; text-align: center; gap: 20px; }
+            .cert-header { flex-direction: column; gap: 15px; }
+            .marksheet-signatures { flex-direction: column; align-items: center; gap: 40px; }
+            
+            /* Certificate scaling for mobile view */
+            .c-title-area h2 { font-size: 28px; }
+            .c-name-area h1 { font-size: 50px; }
+            .c-body-text { font-size: 15px; max-width: 100%; }
+            .c-signatures { flex-direction: column; align-items: center; gap: 50px; }
+            .cert-border-inner { padding: 40px 20px; }
+            .c-seal { margin: 20px 0; }
+        }
+
+        /* === PRINT LOGIC === */
+        @media print {
+            body { background: white !important; -webkit-print-color-adjust: exact; padding: 0; margin: 0; }
+            .no-print, .bg-shape { display: none !important; }
+            .main-wrapper { max-width: 100%; box-shadow: none; margin: 0; padding: 0; }
+            
+            /* Hide both initially in print */
+            .result-wrapper, .certificate-wrapper { display: none; }
+
+            /* Marksheet Print Mode */
+            body.print-mode-marksheet .result-wrapper { 
+                display: block !important; margin: 0; border: none; box-shadow: none; width: 100%; padding: 20px; 
+            }
+            body.print-mode-marksheet .total-score-box { background: #eef2ff !important; border: 2px solid #818cf8; }
+            
+            /* Certificate Print Mode */
+            body.print-mode-certificate .certificate-wrapper { 
+                display: block !important; margin: 0; border: none; box-shadow: none; width: 100%; padding: 0;
+            }
+            body.print-mode-certificate .cert-border-outer { border-width: 0px; height: 98vh; padding: 5px; border-radius: 0; background: var(--primary);}
+            body.print-mode-certificate .cert-border-inner { border-radius: 0; }
+            /* Reset flex for print signatures so they sit side by side */
+            body.print-mode-certificate .c-signatures { flex-direction: row; }
+            body.print-mode-certificate .cert-watermark { opacity: 0.05 !important; }
+            
+            @page { size: auto; margin: 10mm; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Animated Background -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
+
+    <div class="main-wrapper">
+        
+        <!-- HEADER -->
+        <header class="header no-print">
+            <div class="brand-row">
+                <div class="logo-box"><img src="sblak.png" class="logo" alt="SBLAK" onerror="this.src='https://placehold.co/100x100/4338ca/white?text=SBLAK'"></div>
+                <div class="header-text">
+                    <p class="small-tag">✨ GRAND FINALE ✨</p>
+                    <h1>Creator Contest 2026</h1>
+                    <p class="sub-text">Organised by <strong>Sri Balbhadralal Arun Kumar</strong></p>
+                </div>
+                <div class="logo-box"><img src="tripixel.png" class="logo" alt="TriPixel" onerror="this.src='https://placehold.co/100x100/ec4899/white?text=TPM'"></div>
+            </div>
+        </header>
+
+        <!-- SEARCH BOX -->
+        <section class="search-container no-print">
+            <div class="badge-wrapper"><img src="contest.png" class="contest-badge" alt="Contest" onerror="this.src='https://placehold.co/150x150/f59e0b/white?text=BADGE'"></div>
+            
+            <div class="search-card">
+                <h3>View Result & Certificate</h3>
+                <p>Enter your Instagram Username to proceed</p>
+                
+                <div class="instruction-box">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Pro Tip:</strong> Aap apna username bina <strong>'@'</strong> ke ya <strong>'@'</strong> ke saath dono tarah se search kar sakte hain.
+                </div>
+
+                <div class="input-group">
+                    <span class="input-icon">@</span>
+                    <input type="text" id="searchInput" placeholder="e.g. rahul_creations" autocomplete="off">
+                </div>
+                <button onclick="searchResult()" class="btn-search">Generate Documents 🚀</button>
+            </div>
+            <div id="errorMessage" class="error-msg" style="display: none;">
+                <i class="fas fa-exclamation-triangle"></i> <strong>Username Not Found!</strong> Please check your spelling.
+            </div>
+        </section>
+
+        <!-- === SECTION 1: MARKSHEET === -->
+        <div id="resultSheet" class="result-wrapper" style="display: none;">
+            <div class="border-decor top-left"></div>
+            <div class="border-decor top-right"></div>
+            <div class="border-decor bottom-left"></div>
+            <div class="border-decor bottom-right"></div>
+
+            <div class="certificate-content">
+                <div class="cert-header">
+                    <div class="ch-left"><img src="sblak.png" class="sheet-logo" onerror="this.src='https://placehold.co/100x100/4338ca/white?text=SBLAK'"></div>
+                    <div class="ch-center">
+                        <h2>OFFICIAL SCORECARD</h2>
+                        <p>CREATOR CONTEST 2026</p>
+                    </div>
+                    <div class="ch-right"><img src="tripixel.png" class="sheet-logo" onerror="this.src='https://placehold.co/100x100/ec4899/white?text=TPM'"></div>
+                </div>
+
+                <div class="profile-section">
+                    <div class="ps-info">
+                        <h3 id="r_name">Creator Name</h3>
+                        <p class="handle" id="r_id">@username</p>
+                        <span class="batch-tag" id="r_batch">Batch B1</span>
+                    </div>
+                    <div class="ps-rank">
+                        <div class="rank-badge">
+                            <span>CONTEST RANK</span>
+                            <strong id="r_rank">#1</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scores-list">
+                    <div class="score-row">
+                        <div class="sl-labels"><span>Reach Score (40)</span><strong id="r_reach">0</strong></div>
+                        <div class="progress-track"><div class="progress-bar p-blue" id="bar_reach"></div></div>
+                    </div>
+                    <div class="score-row">
+                        <div class="sl-labels"><span>Engagement Score (30)</span><strong id="r_engagement">0</strong></div>
+                        <div class="progress-track"><div class="progress-bar p-pink" id="bar_engagement"></div></div>
+                    </div>
+                    <div class="score-row">
+                        <div class="sl-labels"><span>Creativity Score (20)</span><strong id="r_creativity">0</strong></div>
+                        <div class="progress-track"><div class="progress-bar p-green" id="bar_creativity"></div></div>
+                    </div>
+                    <div class="score-row">
+                        <div class="sl-labels"><span>Discipline Score (10)</span><strong id="r_discipline">0</strong></div>
+                        <div class="progress-track"><div class="progress-bar p-gold" id="bar_discipline"></div></div>
+                    </div>
+                </div>
+
+                <div class="total-score-box">
+                    <span>FINAL SCORE OBTAINED</span>
+                    <h1 id="r_final">0/100</h1>
+                </div>
+
+                <!-- OFFICIAL SEALS & SIGNATURES -->
+                <div class="marksheet-signatures">
+                    <div class="seal-box">
+                        <img src="sblak-seal.png" class="official-stamp" alt="SBLAK Seal" onerror="this.style.display='none'">
+                        <div class="seal-divider"></div>
+                        <p>Sri Balbhadralal</p>
+                        <span>Organiser Seal</span>
+                    </div>
+                    
+                    <div class="seal-box">
+                        <img src="tripixel-seal.png" class="official-stamp" alt="TriPixel Seal" onerror="this.style.display='none'">
+                        <div class="seal-divider"></div>
+                        <p>TriPixel Media</p>
+                        <span>Evaluation Partner</span>
+                    </div>
+                </div>
+
+                <div class="cert-footer">
+                    <div class="stat-box"><i class="fas fa-play-circle"></i> Views: <strong id="r_views">0</strong></div>
+                    <div class="stat-box"><i class="fas fa-heart"></i> Engagement: <strong id="r_eng_total">0</strong></div>
+                </div>
+                <div class="watermark-footer">System Verified &bull; Powered by <strong>TriPixel Media</strong></div>
+            </div>
+        </div>
+
+        <!-- === SECTION 2: CERTIFICATE (CREATIVE THEME) === -->
+        <div id="certificatePanel" class="certificate-wrapper" style="display: none;">
+            <div class="cert-border-outer">
+                <div class="cert-border-inner">
+                    <!-- Faded Background Elements -->
+                    <img src="contest.png" class="cert-watermark" onerror="this.style.display='none'">
+                    <div class="cert-bg-blob1"></div>
+                    <div class="cert-bg-blob2"></div>
+
+                    <div class="c-top-logos">
+                        <img src="sblak.png" class="c-logo" onerror="this.src='https://placehold.co/100x100/4338ca/white?text=SBLAK'">
+                        <div class="cert-award-icon"><i class="fas fa-award"></i></div>
+                        <img src="tripixel.png" class="c-logo" onerror="this.src='https://placehold.co/100x100/ec4899/white?text=TPM'">
+                    </div>
+                    
+                    <div class="c-title-area">
+                        <h2>Creator Contest 2026</h2>
+                        <p class="c-subtitle">CERTIFICATE OF EXCELLENCE</p>
+                    </div>
+
+                    <div class="c-name-area">
+                        <h1 id="c_name">Creator Name</h1>
+                        <div class="c-line"></div>
+                    </div>
+
+                    <div class="c-body-text">
+                        <p>This certifies that the above creator has successfully participated and demonstrated exceptional content strategy, audience engagement, and creative vision in the <strong>Creator Contest 2026</strong>.</p>
+                        <p style="margin-top: 15px; font-weight: 600;">Secured Overall Rank: <strong id="c_rank" style="color: var(--primary); font-size: 26px;">#1</strong></p>
+                    </div>
+
+                    <!-- Signatures -->
+                    <div class="c-signatures">
+                        <div class="sig-block">
+                            <!-- PNG Signature Image -->
+                            <img src="sblak-seal.png" class="cert-stamp" onerror="this.style.display='none'">
+                            <div class="sig-line"></div>
+                            <span>Sri Balbhadralal</span>
+                            <small>Lead Organizer</small>
+                        </div>
+                        <div class="seal-box-center">
+                            <img src="contest.png" class="c-seal" onerror="this.src='https://placehold.co/150x150/f59e0b/white?text=SEAL'">
+                        </div>
+                        <div class="sig-block">
+                            <!-- PNG Signature Image -->
+                            <img src="tripixel-seal.png" class="cert-stamp" onerror="this.style.display='none'">
+                            <div class="sig-line"></div>
+                            <span>TriPixel Media</span>
+                            <small>Evaluation Partner</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- === ACTION BUTTONS === -->
+        <div id="actionArea" class="action-zone no-print" style="display: none;">
+            <h3>Download Your Official Documents</h3>
+            <div class="btn-row">
+                <button onclick="printMarksheet()" class="btn-download btn-blue">
+                    <i class="fas fa-file-invoice"></i> Print Marksheet
+                </button>
+                <button onclick="printCertificate()" class="btn-download btn-gold">
+                    <i class="fas fa-award"></i> Print Certificate
+                </button>
+            </div>
+            <p style="font-size: 12px; color: #64748b; margin-top: 15px;">* For best certificate results, set print layout to <strong>Landscape</strong>.</p>
+        </div>
+
+        <footer class="main-footer no-print">
+            <!-- UPDATED SUPPORT NUMBER -->
+            <p><strong><i class="fas fa-headset"></i> Support Helpline:</strong> +91 6206459531</p>
+            <p>© 2026 Sri Balbhadralal Arun Kumar. All rights reserved.</p>
+        </footer>
+
+    </div>
+
+    <!-- === JAVASCRIPT === -->
+    <script>
+        async function searchResult() {
+            const rawInput = document.getElementById('searchInput').value;
+            const resultSheet = document.getElementById('resultSheet');
+            const certificatePanel = document.getElementById('certificatePanel');
+            const actionArea = document.getElementById('actionArea');
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Reset UI
+            resultSheet.style.display = 'none';
+            certificatePanel.style.display = 'none';
+            actionArea.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            if (!rawInput) {
+                alert("Please enter a username!");
+                return;
+            }
+
+            const searchTerm = rawInput.replace(/@/g, '').trim().toLowerCase();
+            let data = [];
+
+            try {
+                // Fetch Data with timestamp to prevent cache
+                const response = await fetch('data.json?t=' + new Date().getTime());
+                if(response.ok) {
+                    data = await response.json();
+                } else {
+                    throw new Error("File not found");
+                }
+            } catch (error) {
+                console.warn('data.json not found or error. Using Demo Data for preview.');
+                // Fallback Demo Data so the UI works even if JSON is missing temporarily
+                data = [{
+                    "Creator Name": "Rahul Sharma",
+                    "Instagram ID": "rahul_creations",
+                    "Batch No": "B1",
+                    "Rank": 1,
+                    "Reach Score (40)": 38,
+                    "Engagement Score (30)": 27,
+                    "Creativity Score (20)": 18,
+                    "Discipline Score (10)": 10,
+                    "Final Score (100)": 93,
+                    "Total Views": "1.5M",
+                    "Total Engagement": "250K"
+                }];
+                // If user didn't type rahul_creations in demo mode, force error
+                if(searchTerm !== 'rahul_creations') {
+                    errorMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <strong>Username Not Found!</strong><br><small>(System is in Demo Mode. Try searching for: <b>rahul_creations</b>)</small>`;
+                    errorMessage.style.display = 'block';
+                    return;
+                }
+            }
+
+            const creator = data.find(item => {
+                if (!item["Instagram ID"]) return false;
+                const dbId = item["Instagram ID"].toString().replace(/@/g, '').trim().toLowerCase();
+                return dbId === searchTerm;
+            });
+
+            if (creator) {
+                // -- HANDLE DISPLAY NAME --
+                let rawHandle = creator["Instagram ID"].toString();
+                let cleanHandle = rawHandle.replace(/@/g, '').trim();
+                let finalHandleDisplay = "@" + cleanHandle;
+                let creatorName = creator["Creator Name"] || "Awesome Creator";
+                let rank = "#" + (creator["Rank"] || "-");
+
+                // -- POPULATE MARKSHEET --
+                document.getElementById('r_name').textContent = creatorName;
+                document.getElementById('r_id').textContent = finalHandleDisplay;
+                document.getElementById('r_batch').textContent = creator["Batch No"] || "B1";
+                document.getElementById('r_rank').textContent = rank;
+
+                const scoreReach = creator["Reach Score (40)"] || 0;
+                const scoreEng = creator["Engagement Score (30)"] || 0;
+                const scoreCreat = creator["Creativity Score (20)"] || 0;
+                const scoreDisc = creator["Discipline Score (10)"] || 0;
+                const scoreFinal = creator["Final Score (100)"] || 0;
+
+                document.getElementById('r_reach').textContent = scoreReach;
+                document.getElementById('r_engagement').textContent = scoreEng;
+                document.getElementById('r_creativity').textContent = scoreCreat;
+                document.getElementById('r_discipline').textContent = scoreDisc;
+                document.getElementById('r_final').textContent = scoreFinal + "/100";
+
+                document.getElementById('r_views').textContent = creator["Total Views"] || 0;
+                document.getElementById('r_eng_total').textContent = creator["Total Engagement"] || 0;
+
+                // -- POPULATE CERTIFICATE --
+                document.getElementById('c_name').textContent = creatorName;
+                document.getElementById('c_rank').textContent = rank;
+
+                // -- SHOW SECTIONS --
+                resultSheet.style.display = 'block';
+                certificatePanel.style.display = 'block'; 
+                actionArea.style.display = 'block';
+
+                // -- ANIMATE BARS --
+                setTimeout(() => {
+                    document.getElementById('bar_reach').style.width = ((scoreReach / 40) * 100) + "%";
+                    document.getElementById('bar_engagement').style.width = ((scoreEng / 30) * 100) + "%";
+                    document.getElementById('bar_creativity').style.width = ((scoreCreat / 20) * 100) + "%";
+                    document.getElementById('bar_discipline').style.width = ((scoreDisc / 10) * 100) + "%";
+                }, 150);
+
+                // Scroll to results smoothly
+                resultSheet.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                triggerConfetti();
+
+            } else {
+                errorMessage.innerHTML = `<i class="fas fa-exclamation-triangle"></i> <strong>Username Not Found!</strong> Please check your spelling.`;
+                errorMessage.style.display = 'block';
+            }
+        }
+
+        // --- PRINT FUNCTIONS ---
+        function printMarksheet() {
+            document.body.classList.add('print-mode-marksheet');
+            window.print();
+            document.body.classList.remove('print-mode-marksheet');
+        }
+
+        function printCertificate() {
+            document.body.classList.add('print-mode-certificate');
+            window.print();
+            document.body.classList.remove('print-mode-certificate');
+        }
+
+        // --- CONFETTI LOGIC ---
+        function triggerConfetti() {
+            var duration = 3500;
+            var animationEnd = Date.now() + duration;
+            var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 9999 };
+            
+            function random(min, max) { return Math.random() * (max - min) + min; }
+            
+            var interval = setInterval(function() {
+                var timeLeft = animationEnd - Date.now();
+                if (timeLeft <= 0) return clearInterval(interval);
+                var particleCount = 50 * (timeLeft / duration);
+                
+                // Fire from left and right edges
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.1, 0.3), y: Math.random() - 0.2 } }));
+                confetti(Object.assign({}, defaults, { particleCount, origin: { x: random(0.7, 0.9), y: Math.random() - 0.2 } }));
+            }, 250);
+        }
+    </script>
+</body>
+</html>
